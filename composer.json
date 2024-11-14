@@ -2,7 +2,7 @@
     "name": "y.miatselitsa/aks",
     "autoload": {
         "psr-4": {
-            "YMiatselitsa\\Aks\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [
@@ -33,5 +33,8 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.61"
     }
 }
