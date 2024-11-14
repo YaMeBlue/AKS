@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpfpm
+  labels:
+    app: phpfpm
+    layer: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpfpm
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: phpfpm
+    spec:
+      tolerations:
+        - key: "CriticalAddonsOnly"
+          operator: "Equal"
+          value: "true"
+      containers:
+        - image: yameexpondo/azure-container-app-poc.phpfpm
+          name: poc-phpfpm
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+      restartPolicy: Always

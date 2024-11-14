@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      tolerations:
+        - key: "CriticalAddonsOnly"
+          operator: "Equal"
+          value: "true"
+      containers:
+        - name: poc-nginx
+          image: yameexpondo/azure-container-app-poc.nginx
+          ports:
+          - containerPort: 80
+            protocol: TCP
+      restartPolicy: Always

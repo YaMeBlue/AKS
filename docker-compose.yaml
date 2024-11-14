@@ -1,0 +1,26 @@
+services:
+  nginx:
+    container_name: poc-nginx
+    image: yameexpondo/azure-container-app-poc.nginx
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - '8080:80'
+    volumes:
+      - ./src:/var/www/html
+    links:
+      - phpfpm
+      
+  phpfpm:
+    container_name: poc-phpfpm
+    image: yameexpondo/azure-container-app-poc.phpfpm
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./src:/var/www/html
